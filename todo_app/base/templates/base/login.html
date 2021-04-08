@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Tasks | Login
+{% endblock title %}
+
+{% block body %}
+
+<div class="header-bar">
+    <h1>Login</h1>
+</div>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="button" type="submit" value="Login">
+</form>
+
+<p>Don't have an account? <a href="{% url 'register' %}" rel="noopener noreferrer">Signup</a></p>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Tasks | Register
+{% endblock title %}
+
+{% block body %}
+
+<div class="header-bar">
+    <h1>SignUp</h1>
+</div>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <label for="">{{ form.username.label }}</label>
+    {{ form.username }}
+    <label for="">{{ form.password1.label }}</label>
+    {{ form.password1 }}
+    <label for="">{{ form.password2.label }}</label>
+    {{ form.password2 }}
+    <input style="margin-top: 10px;" class="button" type="submit" value="SignUp">
+</form>
+
+<p>Already have an account? <a href="{% url 'login' %}" rel="noopener noreferrer">Login</a></p>
+
+{% endblock %}

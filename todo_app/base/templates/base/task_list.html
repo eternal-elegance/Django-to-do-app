@@ -1,0 +1,102 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Tasks | List
+{% endblock title %}
+
+{% block body %}
+
+<!-- This is the header -->
+
+<div class="header-bar">
+  <div>
+
+    {% if request.user.is_authenticated %}
+    <h1>Hello {{ request.user|title }}</h1>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+
+    <h3><i>{% if count == 0 %}
+        <p>Hurray!! Nothing to do</p>
+        {% else %}
+        <p>{{ count }} more task{{count|pluralize:"s"}} to do</p>
+        {% endif %}
+      </i></h3>
+  </div>
+</div>
+
+
+<!-- This is the body -->
+
+<!-- SEARCH FUNCTION -->
+
+<div id="search-add-wrapper">
+  <form action="" method="get" style="margin-top: 0px; display: flex;">
+    <input type="text" name="search-area" id="search" placeholder="Search" value="{{search_item}}">
+    <input type="submit" value="Search" class="button" style="margin-left: 3px;">
+  </form>
+  <a id="add-link" href="{% url 'task-create' %}">&#x2b;</a>
+</div>
+
+<!--  -->
+
+
+<div class="task-item-wrapper">
+  {% for task in tasks %}
+  <span style="padding: 0px; font-size: 15px; color: rgb(151, 150, 150); padding-top: 10px;">
+    Created on : {{ task.created }}</span>
+  <div class="task-wrapper">
+    {% if task.complete %}
+    <div class="task-title">
+      <div class="task-complete-icon"></div>
+      <i><s><a href="{% url 'task-update' task.id %}">{{ task }}</a></s></i>
+      <!-- descriptions -->
+      {% if task.description %}
+      <div class="task-description">
+        {{ task.description }}
+      </div>
+      {% endif %}
+    </div>
+    <a href="{% url 'task-delete' task.id %}" class="delete-link">&#215;</a>
+    {% else %}
+    <div class="task-title">
+      <div class="task-incomplete-icon"></div>
+      <a href="{% url 'task-update' task.id %}">{{ task }}</a>
+      <!-- descriptions -->
+      {% if task.description %}
+      <div class="task-description">
+        <span> :</span>
+        {{ task.description }}
+      </div>
+      {% endif %}
+    </div>
+    <a href="{% url 'task-delete' task.id %}" class="delete-link">&#215;</a>
+    {% endif %}
+  </div>
+  {% empty %}
+  <h3>Sorry List empty</h3>
+  {% endfor %}
+</div>
+
+<!-- <table>
+  <tr>
+    <th>Items</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  {% for task in tasks %}
+  <tr>
+    <td>{{ task.title }}</td>
+    <td><a href="{% url 'task' task.id %}">View</a></td>
+    <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
+    <td><a href="{% url 'task-delete' task.id %}">Remove</a></td>
+  </tr>
+  {% empty %}
+  <h3>Sorry List empty</h3>
+  {% endfor %}
+
+</table> -->
+{% endblock %}
