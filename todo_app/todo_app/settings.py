@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "*essq8&7k+-(-#5d6+nsb6@bxy#xuxh^ubb5u$iyg$fl!&v1vr"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.netlify.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.netlify.app']
 
 
 # Application definition
